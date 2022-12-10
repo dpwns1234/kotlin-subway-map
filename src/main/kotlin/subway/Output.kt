@@ -28,7 +28,7 @@ class Output {
         println(REMOVE_STATION)
     }
 
-    fun removeInfo() {
+    fun removeStationInfo() {
         println()
         println("[INFO] 지하철 역이 삭제되었습니다.")
     }
@@ -41,8 +41,17 @@ class Output {
     }
 
     // -- line --
-    fun lineView() {
+    fun lineMenu() {
         println(LINE_MENU)
+    }
+    fun registerLine() {
+        println(REGISTER_LINE)
+    }
+    fun removeLine() {
+        println("## 삭제할 노선 이름을 입력하세요.")
+    }
+    fun removeLineInfo() {
+        println("[INFO] 지하철 노선이 삭제되었습니다.")
     }
 
     // 리팩터
@@ -69,7 +78,10 @@ class Output {
                 "1. 노선 등록\n" +
                 "2. 노선 삭제\n" +
                 "3. 노선 조회\n" +
-                "B. 돌아가기"
+                "B. 돌아가기\n\n" +
+                "## 원하는 기능을 선택하세요."
+
+        const val REGISTER_LINE = "## 등록할 노선 이름을 입력하세요."
     }
 
 }

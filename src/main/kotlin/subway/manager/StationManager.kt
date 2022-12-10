@@ -30,7 +30,7 @@ object StationManager: SubwayManager() {
         output.removeStation()
         val name = input.stationName(StationRepository.stations())
         StationRepository.deleteStation(name)
-        output.removeInfo()
+        output.removeStationInfo()
     }
 
     override fun inquiry() {

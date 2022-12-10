@@ -1,5 +1,6 @@
 package subway
 
+import subway.domain.Line
 import subway.domain.Station
 import subway.utils.Constants.ERROR_LESS_THAN_TWO
 import subway.utils.Constants.ERROR_COMMAND
@@ -18,6 +19,8 @@ class Rule {
             TYPE_STATION -> checkCommandStation(input)
             TYPE_LINE -> checkCommandLine(input)
             TYPE_SECTION -> checkCommandSection(input)
+            "upStation" -> checkUpStation(input)
+            "downStation" -> checkDownStation(input)
         }
     }
     private fun checkCommandMain(input: String?): String {
@@ -58,6 +61,34 @@ class Rule {
         return input
     }
 
+    fun checkLineName(input: String, lines: List<Line>): String {
+        // 2글자 이상, 중복 x
+        if(input.length < 2)
+            throw IllegalArgumentException(ERROR_LESS_THAN_TWO)
+        else if(lines.contains(Line(input)))
+            throw IllegalArgumentException(ERROR_REDUPLICATED)
+
+        return input
+    }
+
+    private fun checkUpStation(name: String, stations: List<Station>): String {
+        // 이미 등록된 역이름이라면 통과
+        if(!stations.contains(Station(name)))
+            throw IllegalArgumentException("[ERROR] 없는 역입니다.")
+
+        return name
+    }
+
+    private fun checkDownStation(upStationName: String, downStationName: String, stations: List<Station>): String {
+        // 이미 등록된 역이름이라면 통과
+        if(!stations.contains(Station(downStationName)))
+            throw IllegalArgumentException("[ERROR] 없는 역입니다.")
+        if(downStationName == upStationName)
+            throw IllegalArgumentException("[ERROR] 상행 종점과 하행 종점이 중복됩니다.")
+
+        return downStationName
+    }
+
     // main
     /*
     1, 2, 3, 4, Q -> cmd 에러
@@ -77,12 +108,13 @@ class Rule {
     /*
     1, 2, 3, B -> cmd 에러
     등록:
-    - 역 2글자 이상, 중복 x
-    - 등록된 노선이 없을 경우
+    - 노선이 중복될 경우
+
+    - 역 2글자 이상
     - 상행, 하행 중복일 경우
     - 상행, 하행 하나라도 등록된 역이 없을 경우
     -
-    삭제: 등록되지 않은 역 삭제
+    삭제: 등록되지 않은 노선 삭제
      */
 
     // section

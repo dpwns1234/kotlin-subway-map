@@ -2,6 +2,7 @@ package subway
 
 import subway.domain.Station
 import camp.nextstep.edu.missionutils.Console.readLine
+import subway.domain.Line
 import subway.utils.Constants.TYPE_LINE
 import subway.utils.Constants.TYPE_MAIN
 import subway.utils.Constants.TYPE_SECTION
@@ -64,6 +65,34 @@ class Input {
             true
         }
         return isWrong
+    }
+
+    fun lineName(lines: List<Line>): String {
+        var input: String
+        var isWrong: Boolean
+        do {
+            input = readLine()
+            isWrong = catchExceptionLine(input, lines)
+        } while (isWrong)
+        return input
+    }
+
+    private fun catchExceptionLine(input: String, lines: List<Line>): Boolean {
+        val isWrong = try {
+            rule.checkLineName(input, lines)
+            false
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            true
+        }
+        return isWrong
+    }
+
+    fun upStationName(): String {
+        return getCorrectValue("upStation")
+    }
+    fun downStationName(upStation: String) {
+
     }
 
 }
