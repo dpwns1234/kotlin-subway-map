@@ -4,8 +4,9 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-object StationRepository {
+class StationRepository {
     private val stations: MutableList<Station> = ArrayList()
+    // 아마 이게 getter?
     fun stations(): List<Station> {
         return Collections.unmodifiableList(stations)
     }
