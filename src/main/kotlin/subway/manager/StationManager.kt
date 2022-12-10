@@ -20,8 +20,11 @@ class StationManager: SubwayManager() {
         return input.commandStation()
     }
 
-    override fun registerView() {
+    override fun register() {
         output.registerStation()
+        val name = input.stationName(repository.stations())
+        StationRepository().addStation(Station(name))
+        output.registerInfo()
     }
 
 }

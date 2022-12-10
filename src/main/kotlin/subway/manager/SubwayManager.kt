@@ -27,16 +27,8 @@ abstract class SubwayManager {
     protected abstract fun menuView()
     protected abstract fun inputCommand(): String
 
-    fun register() {
-        // 각자 상황에 맞는(역, 노선) print 후 (## 등록할 역 이름을 입력하세요.)
-        registerView()
-        val name = input.stationName() // TODO 여기부터 생각 (이것도 protected로 해야하는지 아님 여기부터 이제 따로 구현할 것인지 등
-        StationRepository().addStation(Station(name))
-    }
-    protected abstract fun registerView()
+    abstract fun register()
 
-
-    // 이걸 abstract로 받아야할까?
     fun remove() {
         // 공통적인 것들 체크하는 부분
 

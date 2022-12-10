@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="subway.ApplecationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-12-10T14:12:18" hostname="DESKTOP-S1CUI5U" time="0.101">
+  <properties/>
+  <testcase name="main 메뉴에서 주어지지 않은 값이 주어질 경우 예외 처리()" classname="subway.ApplecationTest" time="0.101"/>
+  <system-out><![CDATA[[ERROR] 에러용
+
+## 역 관리 화면
+1. 역 등록
+2. 역 삭제
+3. 역 조회
+B. 돌아가기
+
+## 원하는 기능을 선택하세요.
+[ERROR] 에러용
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

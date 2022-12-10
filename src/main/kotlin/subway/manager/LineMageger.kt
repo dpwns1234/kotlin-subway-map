@@ -12,8 +12,9 @@ class LineManager: SubwayManager() {
         return input.commandLine()
     }
 
-    override fun registerView() {
+    override fun register() {
         TODO("Not yet implemented")
     }
+
 
 }

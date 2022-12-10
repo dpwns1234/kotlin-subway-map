@@ -9,7 +9,7 @@ class SectionManager: SubwayManager() {
         TODO("Not yet implemented")
     }
 
-    override fun registerView() {
+    override fun register() {
         TODO("Not yet implemented")
     }
 }

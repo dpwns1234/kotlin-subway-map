@@ -10,9 +10,11 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    maven { setUrl("https://jitpack.io") }
 }
 
 dependencies {
+    implementation("com.github.woowacourse-projects:mission-utils:1.0.0")
     testImplementation(kotlin("test"))
 }
 

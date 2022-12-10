@@ -1,35 +1,61 @@
 package subway
 
-import subway.utils.Constants.ERROR_MESSAGE
+import subway.domain.Station
+import subway.utils.Constants.ERROR_LESS_THAN_TWO
+import subway.utils.Constants.ERROR_COMMAND
+import subway.utils.Constants.ERROR_REDUPLICATED
 import subway.utils.Constants.QUIT
+import subway.utils.Constants.TYPE_LINE
+import subway.utils.Constants.TYPE_MAIN
+import subway.utils.Constants.TYPE_SECTION
+import subway.utils.Constants.TYPE_STATION
 
 class Rule {
-    fun checkCommandMain(input: String?): String {
+
+    fun checkValue(input: String, type: String) {
+        when(type) {
+            TYPE_MAIN -> checkCommandMain(input)
+            TYPE_STATION -> checkCommandStation(input)
+            TYPE_LINE -> checkCommandLine(input)
+            TYPE_SECTION -> checkCommandSection(input)
+        }
+    }
+    private fun checkCommandMain(input: String?): String {
         if (input == "1" || input == "2" || input == "3" || input == "4" || input == QUIT)
             return input
-        else
-            throw IllegalArgumentException(ERROR_MESSAGE)
+
+        throw IllegalArgumentException(ERROR_COMMAND)
     }
 
-    fun checkCommandStation(input: String?): String {
+    private fun checkCommandStation(input: String?): String {
         if (input == "1" || input == "2" || input == "3" || input == "b")
             return input
-        else
-            throw IllegalArgumentException(ERROR_MESSAGE)
+
+        throw IllegalArgumentException(ERROR_COMMAND)
     }
 
-    fun checkCommandLine(input: String?): String {
+    private fun checkCommandLine(input: String?): String {
         if (input == "1" || input == "2" || input == "3" || input == "b")
             return input
-        else
-            throw IllegalArgumentException(ERROR_MESSAGE)
+
+        throw IllegalArgumentException(ERROR_COMMAND)
     }
 
-    fun checkCommandSection(input: String?): String {
+    private fun checkCommandSection(input: String?): String {
         if (input == "1" || input == "2" || input == "b")
             return input
         else
-            throw IllegalArgumentException(ERROR_MESSAGE)
+            throw IllegalArgumentException(ERROR_COMMAND)
+    }
+
+    fun checkStationName(input: String, stations: List<Station>): String {
+        // 2글자 이상, 중복 x
+        if(input.length < 2)
+            throw IllegalArgumentException(ERROR_LESS_THAN_TWO)
+        else if(stations.contains(Station(input)))
+            throw IllegalArgumentException(ERROR_REDUPLICATED)
+
+        return input
     }
 
     // main
