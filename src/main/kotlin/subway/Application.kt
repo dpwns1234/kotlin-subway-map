@@ -1,19 +1,21 @@
 package subway
 
-import java.util.*
+import subway.utils.Constants.QUIT
 
+fun main(args: Array<String>) {
+    val subwayManger = SubwayManager()
+    val input = Input()
 
-object Application {
-    @JvmStatic
-    fun main(args: Array<String>) {
-        val scanner = Scanner(System.`in`)
+    while(true) {
+        val command = input.mainView()
+        when (command) {
+            // 1. 역 관리
+            // 2. 노선 관리
+            // 3. 구간 관리
+            // 4. 지하철 노선도 출력
+            // Q. 종료
+            QUIT -> break
+        }
     }
-}
 
-//fun main(args: Array<String>) {
-//    println("Hello World!")
-//
-//    // Try adding program arguments via Run/Debug configuration.
-//    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-//    println("Program arguments: ${args.joinToString()}")
-//}
+}
