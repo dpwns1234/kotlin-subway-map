@@ -1,0 +1,4 @@
+package subway
+
+class Input {
+}

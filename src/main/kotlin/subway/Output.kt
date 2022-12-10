@@ -1,0 +1,5 @@
+package subway
+
+class Output {
+
+}
