@@ -28,13 +28,6 @@ abstract class SubwayManager {
     protected abstract fun inputCommand(): String
 
     abstract fun register()
-
-    fun remove() {
-        // 공통적인 것들 체크하는 부분
-
-        // + protected로 adiitional fuction으로 check하도록?
-    }
-    fun inquiry() {
-
-    }
+    abstract fun remove()
+    abstract fun inquiry()
 }

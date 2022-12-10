@@ -12,4 +12,12 @@ class SectionManager: SubwayManager() {
     override fun register() {
         TODO("Not yet implemented")
     }
+
+    override fun remove() {
+        TODO("Not yet implemented")
+    }
+
+    override fun inquiry() {
+        TODO("Not yet implemented")
+    }
 }

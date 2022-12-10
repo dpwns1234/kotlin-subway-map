@@ -23,7 +23,7 @@ private fun mainView(input:Input, output: Output) {
     while(true) {
         output.mainView()
         when (input.commandMain()) {
-            MANAGE_STATION -> subwayManger = StationManager()
+            MANAGE_STATION -> subwayManger = StationManager
             MANAGE_LINE -> subwayManger = LineManager()
             MANAGE_SECTION -> subwayManger = SectionManager()
             MANAGE_OUTPUT_SUBWAY_MAP -> outputSubwayMap()
@@ -34,5 +34,5 @@ private fun mainView(input:Input, output: Output) {
 }
 fun outputSubwayMap() {
     // 전체 노선의 역들을 순서대로 출력
-    StationRepository().stations()
+    StationRepository.stations()
 }
