@@ -25,7 +25,7 @@ private fun mainView(input:Input, output: Output) {
         when (input.commandMain()) {
             MANAGE_STATION -> subwayManger = StationManager
             MANAGE_LINE -> subwayManger = LineManager
-            MANAGE_SECTION -> subwayManger = SectionManager()
+            MANAGE_SECTION -> subwayManger = SectionManager
             MANAGE_OUTPUT_SUBWAY_MAP -> outputSubwayMap()
             QUIT -> break
         }

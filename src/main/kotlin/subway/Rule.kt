@@ -1,7 +1,9 @@
 package subway
 
 import subway.domain.Line
+import subway.domain.LineRepository
 import subway.domain.Station
+import subway.domain.StationRepository
 import subway.utils.Constants.ERROR_LESS_THAN_TWO
 import subway.utils.Constants.ERROR_COMMAND
 import subway.utils.Constants.ERROR_REDUPLICATED
@@ -12,15 +14,16 @@ import subway.utils.Constants.TYPE_SECTION
 import subway.utils.Constants.TYPE_STATION
 
 class Rule {
-
     fun checkValue(input: String, type: String) {
         when(type) {
             TYPE_MAIN -> checkCommandMain(input)
             TYPE_STATION -> checkCommandStation(input)
             TYPE_LINE -> checkCommandLine(input)
             TYPE_SECTION -> checkCommandSection(input)
+
+            "stationName" -> checkStationName(input)
+            "lineName" -> checkLineName(input)
             "upStation" -> checkUpStation(input)
-            "downStation" -> checkDownStation(input)
         }
     }
     private fun checkCommandMain(input: String?): String {
@@ -51,7 +54,8 @@ class Rule {
             throw IllegalArgumentException(ERROR_COMMAND)
     }
 
-    fun checkStationName(input: String, stations: List<Station>): String {
+    fun checkStationName(input: String): String {
+        val stations = StationRepository.stations()
         // 2글자 이상, 중복 x
         if(input.length < 2)
             throw IllegalArgumentException(ERROR_LESS_THAN_TWO)
@@ -61,32 +65,43 @@ class Rule {
         return input
     }
 
-    fun checkLineName(input: String, lines: List<Line>): String {
+    fun checkLineName(input: String): String {
+        val lines = LineRepository.lines()
         // 2글자 이상, 중복 x
         if(input.length < 2)
             throw IllegalArgumentException(ERROR_LESS_THAN_TWO)
-        else if(lines.contains(Line(input)))
-            throw IllegalArgumentException(ERROR_REDUPLICATED)
+
+        for(line in lines) {
+            if(line.name == input)
+                throw IllegalArgumentException(ERROR_REDUPLICATED)
+        }
 
         return input
     }
 
-    private fun checkUpStation(name: String, stations: List<Station>): String {
-        // 이미 등록된 역이름이라면 통과
-        if(!stations.contains(Station(name)))
-            throw IllegalArgumentException("[ERROR] 없는 역입니다.")
-
-        return name
+    private fun checkUpStation(name: String): String {
+        val stations = StationRepository.stations()
+        for(station in stations) {
+            // 이미 등록된 역이름이라면 통과
+            if(station.name == name)
+                return name
+        }
+        throw IllegalArgumentException("[ERROR] 없는 역입니다.")
     }
 
-    private fun checkDownStation(upStationName: String, downStationName: String, stations: List<Station>): String {
-        // 이미 등록된 역이름이라면 통과
-        if(!stations.contains(Station(downStationName)))
-            throw IllegalArgumentException("[ERROR] 없는 역입니다.")
+    fun checkDownStation(downStationName: String, upStationName: String): String {
+        val stations = StationRepository.stations()
+        // 상행역과 중복된 역 이름이라면 불통과
         if(downStationName == upStationName)
             throw IllegalArgumentException("[ERROR] 상행 종점과 하행 종점이 중복됩니다.")
 
-        return downStationName
+        for(station in stations) {
+            // 이미 등록된 역이름이라면 통과
+            if(station.name == downStationName)
+                return downStationName
+        }
+
+        throw IllegalArgumentException("[ERROR] 없는 역입니다.")
     }
 
     // main

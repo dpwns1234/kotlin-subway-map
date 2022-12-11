@@ -21,14 +21,14 @@ object StationManager: SubwayManager() {
 
     override fun register() {
         output.registerStation()
-        val name = input.stationName(StationRepository.stations())
+        val name = input.stationName()
         StationRepository.addStation(Station(name))
         output.registerInfo()
     }
 
     override fun remove() {
         output.removeStation()
-        val name = input.stationName(StationRepository.stations())
+        val name = input.stationName()
         StationRepository.deleteStation(name)
         output.removeStationInfo()
     }
@@ -36,5 +36,4 @@ object StationManager: SubwayManager() {
     override fun inquiry() {
         output.inquiryStations(StationRepository.stations())
     }
-
 }

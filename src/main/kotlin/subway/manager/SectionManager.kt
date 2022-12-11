@@ -1,6 +1,6 @@
 package subway.manager
 
-class SectionManager: SubwayManager() {
+object SectionManager: SubwayManager() {
     override fun menuView() {
         TODO("Not yet implemented")
     }
