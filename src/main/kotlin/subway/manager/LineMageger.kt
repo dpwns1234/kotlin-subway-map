@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console
 import subway.Input
 import subway.Output
 import subway.domain.*
+import subway.utils.Constants.TYPE_LINE
 
 object LineManager: SubwayManager() {
     private val input = Input()
@@ -13,15 +14,15 @@ object LineManager: SubwayManager() {
     }
 
     override fun inputCommand(): String {
-        return input.commandLine()
+        return input.command(TYPE_LINE)
     }
 
     override fun register() {
         output.registerLine()
-        val lineName = input.lineName()
+        val lineName = input.name("lineName")
         // 상행 종점역
         println("## 등록할 노선의 상행 종점역 이름을 입력하세요.")
-        val upStation = input.upStationName()
+        val upStation = input.name("upStationName")
         // 하행 종점역
         println("## 등록할 노선의 하행 종점역 이름을 입력하세요.")
         val downStation = input.downStationName(upStation)

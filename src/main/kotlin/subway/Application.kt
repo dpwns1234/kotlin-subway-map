@@ -11,6 +11,7 @@ import subway.utils.Constants.MANAGE_OUTPUT_SUBWAY_MAP
 import subway.utils.Constants.MANAGE_SECTION
 import subway.utils.Constants.MANAGE_STATION
 import subway.utils.Constants.QUIT
+import subway.utils.Constants.TYPE_MAIN
 
 fun main() {
     val input = Input()
@@ -22,7 +23,7 @@ private fun mainView(input:Input, output: Output) {
     var subwayManger: SubwayManager? = null
     while(true) {
         output.mainView()
-        when (input.commandMain()) {
+        when (input.command(TYPE_MAIN)) {
             MANAGE_STATION -> subwayManger = StationManager
             MANAGE_LINE -> subwayManger = LineManager
             MANAGE_SECTION -> subwayManger = SectionManager

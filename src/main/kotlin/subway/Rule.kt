@@ -1,6 +1,5 @@
 package subway
 
-import subway.domain.Line
 import subway.domain.LineRepository
 import subway.domain.Station
 import subway.domain.StationRepository
@@ -14,39 +13,41 @@ import subway.utils.Constants.TYPE_SECTION
 import subway.utils.Constants.TYPE_STATION
 
 class Rule {
-    fun checkValue(input: String, type: String) {
+    fun checkCommand(input: String, type: String) {
         when(type) {
             TYPE_MAIN -> checkCommandMain(input)
             TYPE_STATION -> checkCommandStation(input)
             TYPE_LINE -> checkCommandLine(input)
             TYPE_SECTION -> checkCommandSection(input)
-
-            "stationName" -> checkStationName(input)
-            "lineName" -> checkLineName(input)
-            "upStation" -> checkUpStation(input)
         }
     }
+
+    fun checkName(input: String, type: String) {
+        when(type) {
+            "stationName" -> checkStationName(input)
+            "lineName" -> checkLineName(input)
+            "upStationName" -> checkUpStation(input)
+        }
+    }
+
     private fun checkCommandMain(input: String?): String {
         if (input == "1" || input == "2" || input == "3" || input == "4" || input == QUIT)
             return input
 
         throw IllegalArgumentException(ERROR_COMMAND)
     }
-
     private fun checkCommandStation(input: String?): String {
         if (input == "1" || input == "2" || input == "3" || input == "b")
             return input
 
         throw IllegalArgumentException(ERROR_COMMAND)
     }
-
     private fun checkCommandLine(input: String?): String {
         if (input == "1" || input == "2" || input == "3" || input == "b")
             return input
 
         throw IllegalArgumentException(ERROR_COMMAND)
     }
-
     private fun checkCommandSection(input: String?): String {
         if (input == "1" || input == "2" || input == "b")
             return input
@@ -54,12 +55,12 @@ class Rule {
             throw IllegalArgumentException(ERROR_COMMAND)
     }
 
-    fun checkStationName(input: String): String {
+    private fun checkStationName(input: String): String {
         val stations = StationRepository.stations()
         // 2글자 이상, 중복 x
         if(input.length < 2)
             throw IllegalArgumentException(ERROR_LESS_THAN_TWO)
-        else if(stations.contains(Station(input)))
+        else if(stations.contains(Station(input))) // TODO 작동x Cuz. 객체가 다르므로
             throw IllegalArgumentException(ERROR_REDUPLICATED)
 
         return input

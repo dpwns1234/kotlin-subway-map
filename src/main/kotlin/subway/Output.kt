@@ -3,6 +3,11 @@ package subway
 import subway.domain.Station
 
 class Output {
+
+    fun printErrorMessage(message: String?) {
+        println(message)
+    }
+
     fun mainView() {
         println()
         println(MAIN_MENU)
